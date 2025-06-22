@@ -7,7 +7,7 @@ A production-ready Telegram bot that delivers daily AAVE DeFi market updates to 
 ### **Core Features**
 
 #### **1. Daily Message Delivery**
-- **Automated Scheduling**: Sends daily messages at 8:00 AM UTC via GitHub Actions
+- **Automated Scheduling**: Sends daily messages at 9:00 AM HKT (1:00 AM UTC) via GitHub Actions
 - **Manual Triggering**: Supports on-demand message generation for testing
 - **Reliable Delivery**: Implements retry logic with exponential backoff
 - **Error Handling**: Comprehensive error handling with specific exit codes
@@ -71,7 +71,7 @@ A production-ready Telegram bot that delivers daily AAVE DeFi market updates to 
 🔗 **View Full Markets**
 👉 [AAVE Base Markets](https://app.aave.com/?marketName=proto_base_v3)
 
-⏰ Updated: 18:18 UTC
+⏰ Updated: 18:18 HKT
 ```
 
 ### **Supported Networks & Tokens**

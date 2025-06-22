@@ -4,7 +4,7 @@ A production-ready Telegram bot that delivers daily AAVE DeFi market updates wit
 
 ## 🚀 Features
 
-- **📅 Daily Automated Messages**: Scheduled delivery at 8:00 AM UTC via GitHub Actions
+- **📅 Daily Automated Messages**: Scheduled delivery at 9:00 AM HKT (1:00 AM UTC) via GitHub Actions
 - **📊 Real-time AAVE Data**: Live supply/borrow APY rates from AAVE Base network
 - **💰 Multi-token Support**: ETH, USDC, cbBTC, and DAI market data
 - **🔗 Direct Market Access**: Clickable links to AAVE Base markets
@@ -73,7 +73,7 @@ python bot.py
    - `TELEGRAM_BOT_TOKEN`: Your bot token
    - `TELEGRAM_CHAT_ID`: Your chat ID
 
-2. **Enable GitHub Actions**: The workflow runs automatically at 8:00 AM UTC
+2. **Enable GitHub Actions**: The workflow runs automatically at 9:00 AM HKT (1:00 AM UTC)
 
 3. **Manual Trigger**: Use "Run workflow" button for testing
 
@@ -99,7 +99,7 @@ The bot delivers structured market updates:
 🔗 **View Full Markets**
 👉 [AAVE Base Markets](https://app.aave.com/?marketName=proto_base_v3)
 
-⏰ Updated: 18:18 UTC
+⏰ Updated: 18:18 HKT
 ```
 
 ## 🏗️ Architecture

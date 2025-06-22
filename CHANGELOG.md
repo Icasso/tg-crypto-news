@@ -9,6 +9,8 @@ All notable changes to the Telegram Crypto News Bot project.
 #### 🕒 Scheduling Changes
 - **Updated daily message schedule** from 8:00 AM UTC to 9:00 AM HKT (1:00 AM UTC)
 - **Improved timezone handling** for Hong Kong time zone alignment
+- **Updated message timestamps** to display Hong Kong Time (HKT) instead of UTC
+- **Added pytz dependency** for accurate timezone conversion
 
 #### 🛠️ CI/CD Enhancements
 - **Upgraded GitHub Actions** `upload-artifact` from v3 to v4 for improved functionality

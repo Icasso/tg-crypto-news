@@ -6,6 +6,7 @@ python-telegram-bot==22.1
 PyYAML==6.0.2
 python-dotenv==1.0.1
 requests==2.32.3
+pytz==2024.1
 
 # Web3 and blockchain dependencies
 web3==6.20.3

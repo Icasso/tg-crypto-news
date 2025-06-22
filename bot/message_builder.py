@@ -120,10 +120,12 @@ class AaveMarketComponent(MessageComponent):
             )
             message_parts.append("")
 
-            # Timestamp
+            # Timestamp in Hong Kong Time (HKT)
             from datetime import datetime
+            import pytz
 
-            timestamp = datetime.now().strftime("%H:%M UTC")
+            hkt = pytz.timezone('Asia/Hong_Kong')
+            timestamp = datetime.now(hkt).strftime("%H:%M HKT")
             message_parts.append(f"⏰ Updated: {timestamp}")
 
             return "\n".join(message_parts)
