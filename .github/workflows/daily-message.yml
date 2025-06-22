@@ -2,8 +2,8 @@ name: Daily Crypto News Message
 
 on:
   schedule:
-    # Run daily at 8:00 AM UTC
-    - cron: "0 8 * * *"
+    # Run daily at 9:00 AM HKT (1:00 AM UTC)
+    - cron: "0 1 * * *"
 
   # Allow manual triggering for testing
   workflow_dispatch:
