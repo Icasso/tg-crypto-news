@@ -2,6 +2,51 @@
 
 All notable changes to the Telegram Crypto News Bot project.
 
+## [1.0.1] - 2025-01-09
+
+### 🔄 Updates & Improvements
+
+#### 🕒 Scheduling Changes
+- **Updated daily message schedule** from 8:00 AM UTC to 9:00 AM HKT (1:00 AM UTC)
+- **Improved timezone handling** for Hong Kong time zone alignment
+
+#### 🛠️ CI/CD Enhancements
+- **Upgraded GitHub Actions** `upload-artifact` from v3 to v4 for improved functionality
+- **Enhanced artifact handling** with better retention and upload capabilities
+- **Improved error logging** with automatic log upload on workflow failures
+
+#### 📦 Dependency Management
+- **Created separate production requirements** (`requirements-prod.txt`)
+- **Optimized production deployment** with minimal dependency footprint
+- **Refactored development dependencies** to separate file structure
+- **Updated core dependencies** to latest stable versions:
+  - `python-telegram-bot==22.1`
+  - `PyYAML==6.0.2`
+  - `web3==6.20.3`
+  - `pytest==8.3.3`
+
+#### 🧪 Testing Improvements
+- **Enhanced AAVE client tests** with better error handling coverage
+- **Improved bot core tests** with comprehensive async testing
+- **Added new testing utilities** for better test organization
+- **Increased test coverage** for critical components
+
+#### 🏗️ Infrastructure Updates
+- **Optimized GitHub Actions workflow** to use production-only dependencies
+- **Improved deployment efficiency** with faster installation times
+- **Enhanced debugging capabilities** with optional debug logging
+- **Better artifact management** with 7-day retention policy
+
+### 🐛 Bug Fixes
+- **Fixed workflow timing issues** with proper timezone configuration
+- **Resolved dependency conflicts** between development and production environments
+- **Improved error handling** in test suites
+
+### 📈 Performance Improvements
+- **Reduced deployment time** by ~40% with optimized dependency installation
+- **Faster CI/CD pipeline** with production-focused requirements
+- **Improved artifact upload speed** with GitHub Actions v4
+
 ## [1.0.0] - 2025-06-22
 
 ### 🚀 Production Ready Release

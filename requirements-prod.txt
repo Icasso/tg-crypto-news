@@ -1,0 +1,14 @@
+# Production-only dependencies for GitHub Actions deployment
+# This file contains only the minimal dependencies needed to run the bot
+
+# Core production dependencies
+python-telegram-bot==22.1
+PyYAML==6.0.2
+python-dotenv==1.0.1
+requests==2.32.3
+
+# Web3 and blockchain dependencies
+web3==6.20.3
+eth-typing==3.5.2
+eth-utils==2.3.1
+eth-abi==4.2.1 
