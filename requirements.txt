@@ -1,0 +1,29 @@
+# Production Dependencies - Telegram Crypto News Bot
+# Pinned versions for reproducible builds
+
+# Core dependencies
+PyYAML==6.0.2
+requests==2.32.3
+
+# Telegram Bot API
+python-telegram-bot==21.7
+
+# Date and time handling
+pytz==2024.1
+
+# AAVE Web3 integration - Fixed compatibility issues
+web3==6.20.3
+eth-typing==4.3.1
+
+# Local development
+python-dotenv==1.0.1
+
+# Development and testing (optional)
+pytest==8.3.3
+pytest-asyncio==0.24.0
+black==24.8.0
+flake8==7.1.1
+mypy==1.11.2
+
+# Additional production dependencies
+aiohttp==3.10.10 

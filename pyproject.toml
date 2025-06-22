@@ -1,0 +1,117 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "telegram-crypto-news-bot"
+version = "1.0.0"
+description = "Production-ready Telegram bot for AAVE crypto market updates"
+readme = "README.md"
+license = {text = "MIT"}
+authors = [
+    {name = "Crypto Bot Team", email = "bot@example.com"}
+]
+keywords = ["telegram", "crypto", "aave", "defi", "bot"]
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Intended Audience :: End Users/Desktop",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Communications :: Chat",
+    "Topic :: Office/Business :: Financial",
+]
+requires-python = ">=3.11"
+dependencies = [
+    "PyYAML>=6.0.2",
+    "requests>=2.32.3",
+    "python-telegram-bot>=21.7",
+    "pytz>=2024.1",
+    "web3>=6.20.3",
+    "eth-typing>=4.3.1",
+    "python-dotenv>=1.0.1",
+    "aiohttp>=3.10.10",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.3.3",
+    "pytest-asyncio>=0.24.0",
+    "black>=24.8.0",
+    "flake8>=7.1.1",
+    "mypy>=1.11.2",
+]
+
+[project.urls]
+Homepage = "https://github.com/your-org/telegram-crypto-news-bot"
+Repository = "https://github.com/your-org/telegram-crypto-news-bot"
+Issues = "https://github.com/your-org/telegram-crypto-news-bot/issues"
+
+[project.scripts]
+crypto-bot = "bot:main"
+
+[tool.black]
+line-length = 100
+target-version = ['py311']
+include = '\.pyi?$'
+extend-exclude = '''
+/(
+  # directories
+  \.eggs
+  | \.git
+  | \.hg
+  | \.mypy_cache
+  | \.tox
+  | \.venv
+  | build
+  | dist
+)/
+'''
+
+[tool.flake8]
+max-line-length = 100
+ignore = ["E203", "W503"]
+exclude = [".git", "__pycache__", ".venv", "build", "dist"]
+
+[tool.mypy]
+python_version = "3.11"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true
+disallow_incomplete_defs = true
+check_untyped_defs = true
+disallow_untyped_decorators = true
+no_implicit_optional = true
+warn_redundant_casts = true
+warn_unused_ignores = true
+warn_no_return = true
+warn_unreachable = true
+strict_equality = true
+
+[tool.pytest.ini_options]
+minversion = "6.0"
+addopts = "-ra -q --strict-markers"
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]
+asyncio_mode = "auto"
+
+[tool.coverage.run]
+source = ["bot", "aave"]
+omit = ["*/tests/*", "*/__pycache__/*"]
+
+[tool.coverage.report]
+exclude_lines = [
+    "pragma: no cover",
+    "def __repr__",
+    "if self.debug:",
+    "if settings.DEBUG",
+    "raise AssertionError",
+    "raise NotImplementedError",
+    "if 0:",
+    "if __name__ == .__main__.:",
+] 

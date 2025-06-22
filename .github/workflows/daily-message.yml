@@ -1,0 +1,151 @@
+name: Daily Crypto News Message
+
+on:
+  schedule:
+    # Run daily at 8:00 AM UTC
+    - cron: "0 8 * * *"
+
+  # Allow manual triggering for testing
+  workflow_dispatch:
+    inputs:
+      debug:
+        description: "Enable debug logging"
+        required: false
+        default: false
+        type: boolean
+
+permissions:
+  contents: read
+
+jobs:
+  send-daily-message:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    strategy:
+      matrix:
+        python-version: ["3.11"]
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+          cache: "pip"
+          cache-dependency-path: |
+            requirements.txt
+            pyproject.toml
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip setuptools wheel
+          pip install -r requirements.txt
+
+      - name: Validate configuration
+        run: |
+          python -c "
+          import yaml
+          import sys
+
+          try:
+              with open('config.yaml', 'r') as f:
+                  config = yaml.safe_load(f)
+              
+              print('✅ Configuration YAML is valid')
+              
+              # Check required sections
+              if 'aave' in config:
+                  print(f'✅ AAVE config found: enabled={config[\"aave\"].get(\"enabled\", False)}')
+              else:
+                  print('⚠️  No AAVE configuration found')
+                  
+              print('✅ Configuration validation complete')
+              
+          except Exception as e:
+              print(f'❌ Configuration validation failed: {e}')
+              sys.exit(1)
+          "
+
+      - name: Run health checks
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: |
+          echo "🏥 Running system health checks..."
+
+          # Test AAVE client connectivity
+          python -c "
+          import asyncio
+          from aave import AaveClient, Network
+
+          async def health_check():
+              try:
+                  client = AaveClient(network=Network.BASE)
+                  is_healthy = await client.health_check()
+                  print(f'✅ AAVE Base network: {\"HEALTHY\" if is_healthy else \"UNHEALTHY\"}')
+                  return is_healthy
+              except Exception as e:
+                  print(f'❌ AAVE health check failed: {e}')
+                  return False
+
+          result = asyncio.run(health_check())
+          exit(0 if result else 1)
+          "
+
+      - name: Send daily message
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          DEBUG: ${{ github.event.inputs.debug || 'false' }}
+        run: |
+          echo "🚀 Starting daily crypto news bot..."
+
+          # Set debug logging if requested
+          if [ "$DEBUG" = "true" ]; then
+            export PYTHONPATH="${PYTHONPATH}:."
+            python -c "import logging; logging.basicConfig(level=logging.DEBUG)"
+          fi
+
+          # Run the bot
+          python bot.py
+
+          echo "✅ Daily message sent successfully!"
+
+      - name: Log completion
+        if: always()
+        run: |
+          echo "📊 Workflow completed at $(date -u)"
+          echo "📋 Status: ${{ job.status }}"
+          echo "🔍 Run ID: ${{ github.run_id }}"
+          echo "📝 Commit: ${{ github.sha }}"
+
+  test:
+    runs-on: ubuntu-latest
+    if: github.event_name == 'workflow_dispatch'
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: "pip"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install pytest pytest-asyncio
+
+      - name: Run tests
+        run: |
+          echo "🧪 Running test suite..."
+          python -m pytest tests/ -v --tb=short
+          echo "✅ Tests completed!"

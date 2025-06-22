@@ -1,0 +1,10 @@
+# Telegram Crypto News Bot Configuration
+
+# Message settings
+message: "Hello World Bot - Testing!"
+
+# AAVE service settings
+aave:
+  enabled: true # Set to true to enable AAVE data fetching
+  target_tokens: ["ETH", "USDC", "cbBTC"] # Target cryptocurrencies to display (available on Base)
+  table_format: true # Use card format for better Telegram readability
